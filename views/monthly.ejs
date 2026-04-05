@@ -1,0 +1,21 @@
+<h3>Total Income: ₦<%= totalIncome %></h3>
+<h3>Total Expense: ₦<%= totalExpense %></h3>
+<h2>Balance: ₦<%= balance %></h2>
+<h2>Monthly Summary</h2>
+
+
+<table>
+  <tr>
+    <th>Month</th>
+    <th>Income</th>
+    <th>Expense</th>
+  </tr>
+
+  <% summary.forEach(item => { %>
+    <tr>
+      <td><%= item.month %></td>
+      <td>₦<%= item.total_income %></td>
+      <td>₦<%= item.total_expense %></td>
+    </tr>
+  <% }) %>
+</table>

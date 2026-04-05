@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="/style.css">
+
+<div class="container">
+  <h2>Login</h2>
+
+  <form action="/login" method="POST">
+    <input name="email" placeholder="Email" required />
+
+    <div style="position: relative; width: 250px;">
+  
+  <!-- Password Input -->
+  <input 
+    type="password" 
+    id="password" 
+    name="password"
+    placeholder="Enter password"
+    style="
+      width: 100%;
+      padding-right: 40px;
+      height: 38px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding-left: 10px;
+      outline: none;
+    "
+  />
+
+  <!-- Eye Icon -->
+  <span 
+    id="togglePassword" 
+    style="
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    "
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+      
+      <!-- Eye shape -->
+      <path 
+        d="M12 5C5 5 1 12 1 12s4 7 11 7 11-7 11-7-4-7-11-7z"
+        stroke="#6b7280"
+        stroke-width="2"
+      />
+
+      <!-- Eye pupil -->
+      <circle 
+        cx="12" 
+        cy="12" 
+        r="3" 
+        stroke="#6b7280"
+        stroke-width="2"
+      />
+
+      <!-- Slash -->
+      <line 
+        id="eyeSlash"
+        x1="2" y1="2" x2="22" y2="22"
+        stroke="#6b7280"
+        stroke-width="2"
+        style="display:none;"
+      />
+
+    </svg>
+  </span>
+
+</div>
+
+<script>
+  const password = document.getElementById("password");
+  const toggle = document.getElementById("togglePassword");
+  const slash = document.getElementById("eyeSlash");
+
+  toggle.addEventListener("click", function () {
+    
+    if (password.type === "password") {
+      password.type = "text";
+      slash.style.display = "block"; // show slash
+    } else {
+      password.type = "password";
+      slash.style.display = "none"; // hide slash
+    }
+
+  });
+</script>
+
+  <p>Don't have account? <a href="/register">Register</a></p>
+  <p>Forgot Password? <a href="/forgot-password">Reset Password</a></p>
+</div>

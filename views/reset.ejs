@@ -1,0 +1,77 @@
+
+
+<form action="/reset-password" method="POST">
+  <!-- <input type="hidden" name="token" value=" /> -->
+  <input type="hidden" name="token" value="<%= token %>" />
+  
+  <!-- <input type="password" name="password" placeholder="Enter new password" required /> -->
+   <div style="position: relative; width: 250px;">
+  <input 
+    type="password" 
+    id="password"
+    name="password"
+    placeholder="Enter new password"
+    style="width: 70%; padding-right: 30px;"
+  />
+
+  <span 
+    id="togglePassword" 
+    style="position: calc(); right: 1px; top: 1px; cursor: pointer;"
+  >
+    👁️
+  </span>
+</div>
+  
+  <button style="color: green;" type="submit">Reset Password</button>
+  </form>
+  <script>
+  const password = document.getElementById("password");
+  const toggle = document.getElementById("togglePassword");
+
+  toggle.addEventListener("click", function () {
+    if (password.type === "password") {
+      password.type = "text";
+      this.textContent = "🙈";
+    } else {
+      password.type = "password";
+      this.textContent = "👁️";
+    }
+  });
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  <% if (typeof success !== 'undefined' && success) { %>
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: "<%= success %>",
+      position: "top",
+      timer: 2000,
+      showConfirmButton: false
+    });
+
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 2000);
+  <% } %>
+
+  <% if (typeof error !== 'undefined' && error) { %>
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "<%= error %>",
+      position: "top"
+    });
+  <% } %>
+</script>
+
+
+
+
+<!-- <form action="/reset-password" method="POST">
+  <input type="hidden" name="token" value="<%= token %>" />
+  <input type="password" name="newPassword" placeholder="New Password" required />
+  <button type="submit">Update Password</button>
+</form> -->

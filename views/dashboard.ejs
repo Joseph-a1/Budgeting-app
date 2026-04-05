@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="/style.css">
+
+<div class="container">
+  <div class="header">
+    <h2> Dashboard</h2>
+    <a href="/logout" class="btn small">Logout</a>
+  </div>
+
+  <form action="/add" method="POST" class="form-grid">
+    <input name="description" placeholder="Description" required />
+    <input name="income" placeholder="Income" />
+    <input name="expense" placeholder="Expense" />
+    <button class="btn">Add</button>
+  </form>
+ <!-- <form action="/add" method="POST">
+  <input type="text" name="description" placeholder="Enter description" required />
+
+  <input type="number" name="income" placeholder="Income" />
+  <input type="number" name="expense" placeholder="Expense" /> 
+
+  <button type="submit">Add</button>
+</form> -->
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Description</th>
+      <th>Income</th>
+      <th>Expense</th>
+      <th>Action</th>
+    </tr>
+
+     <% let incomeTotal = 0; let expenseTotal = 0; %> 
+
+    <% transactions.forEach(t => { 
+      incomeTotal += Number(t.income);
+      expenseTotal += Number(t.expense);
+    %>
+    <tr>
+      <td><%= t.id %></td>
+      <td style="color: purple;"><%= t.description %></td>
+      <td class="green"><%= t.income %></td>
+      <td class="red"><%= t.expense %></td>
+      <td>
+        <form action="/delete/<%= t.id %>" method="POST">
+          <button class="btn danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </table>
+
+  <div class="summary">
+    <h3>Income: ₦<%= incomeTotal %></h3>
+    <h3>Expense: ₦<%= expenseTotal %></h3>
+    <h2>Balance: ₦<%= incomeTotal - expenseTotal %></h2>
+    
+  </div>
+</div> -->

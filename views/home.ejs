@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/style.css">
+<header>
+  <nav class="navbar">
+    <div class="logo">💰 Budget Tracker</div>
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/login">Login</a></li>
+      <li><a href="/register">Register</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/forgot-password">Forgot Password</a></li>
+    </ul>
+  </nav>
+</header>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+
+<div class="container center">
+  <h1>💰 Budget Tracker</h1>
+  <p>Track your income and expenses easily with 0 stress👌</p>
+
+  <div class="btn-group">
+    <a href="/login" class="btn">Login</a>
+    <a href="/register" class="btn outline">Register</a>
+     <p>Forgot Password? <a href="/forgot-password" class="homepage-container .link"> Click To Reset Your Password</a></p>
+    
+  </div>
+</div>
