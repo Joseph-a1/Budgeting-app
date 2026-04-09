@@ -8,7 +8,7 @@ import pg from "pg";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import dotenv from 'dotenv'
-import { sendResetEmail } from "./emailService.js";
+import { sendResetEmail } from "./emailservice.js";
 import pkg from "pg";
 const { Pool } = pkg;
 
@@ -285,7 +285,7 @@ app.get("/logout", (req, res) => {
 });
 
 
-app.listen(port, () =>{
+  app.listen(port, () =>{
   console.log(`Listening on port${port}`)
 })
 
