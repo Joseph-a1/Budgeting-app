@@ -6,8 +6,8 @@ const db = new Pool({
     rejectUnauthorized: false
   }
 });
-
-module.exports = db;
+export default db;
+// module.exports = db;
 // const { Pool } = require("pg");
 
 // const pool = new Pool({
