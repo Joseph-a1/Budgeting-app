@@ -9,6 +9,7 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import dotenv from 'dotenv'
 import { sendResetEmail } from "./emailservice.js";
+import db from "./db.js";
 import pkg from "pg";
 const { Pool } = pkg;
 
