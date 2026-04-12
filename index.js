@@ -201,22 +201,52 @@ app.get("/dashboard", async (req, res) => {
   res.render("dashboard", { transactions: data.rows });
 });
 
+
+
 // ADD
+
 app.post("/add", async (req, res) => {
-  if (!req.session.user) return res.redirect("/login");
+  try {
+    if (!req.session.user) return res.redirect("/login");
 
-  const { description, income, expense } = req.body;
+    const { description, income, expense } = req.body;
 
-  await db.query(
-    "INSERT INTO transactions (user_id, description, income, expense) VALUES ($1,$2,$3,$4)",
-    [req.session.user.id, description, income || 0, expense || 0]
-  );
+    // convert properly
+    const inc = income ? Number(income) : 0;
+    const exp = expense ? Number(expense) : 0;
 
-if (income && expense) {
-  return res.send("Enter either income OR expense, not both.");
-}
-  res.redirect("/dashboard");
+    // validation FIRST
+    if (inc > 0 && exp > 0) {
+      return res.send("Enter either income OR expense, not both.");
+    }
+
+    await db.query(
+      "INSERT INTO transactions (user_id, description, income, expense) VALUES ($1,$2,$3,$4)",
+      [req.session.user.id, description, inc, exp]
+    );
+
+    res.redirect("/dashboard");
+
+  } catch (err) {
+    console.error("ADD ERROR:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
+// app.post("/add", async (req, res) => {
+//   if (!req.session.user) return res.redirect("/login");
+
+//   const { description, income, expense } = req.body;
+
+//   await db.query(
+//     "INSERT INTO transactions (user_id, description, income, expense) VALUES ($1,$2,$3,$4)",
+//     [req.session.user.id, description, income || 0, expense || 0]
+//   );
+
+// if (income && expense) {
+//   return res.send("Enter either income OR expense, not both.");
+// }
+//   res.redirect("/dashboard");
+// });
 
 app.get("/", async (req, res) => {
   const result = await db.query("SELECT * FROM transactions");
