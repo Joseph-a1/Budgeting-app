@@ -29,10 +29,35 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// app.use(session({
+//   secret: "budget-secret",
+//   resave: false,
+//   saveUninitialized: false
+// }));
+// import session from "express-session";
+// import pgSession from "connect-pg-simple";
+// import pkg from "pg";
+
+// const { Pool } = pkg;
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
+
+const PostgresSession = pgSession(session);
+
 app.use(session({
-  secret: "budget-secret",
+  store: new PostgresSession({
+    pool: pool,
+    tableName: "session"
+  }),
+  secret: process.env.SESSION_SECRET || "budget-secret",
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // 1 day
+  }
 }));
 const port = process.env.PORT || 3000;
 //  const port = 3000;
@@ -210,6 +235,7 @@ app.post("/add", async (req, res) => {
     if (!req.session.user) return res.redirect("/login");
 
     const { description, income, expense } = req.body;
+    console.log(req.body);
 
     // convert properly
     const inc = income ? Number(income) : 0;
@@ -268,16 +294,16 @@ app.get("/", async (req, res) => {
     balance
   });
 });
-app.post("/add", async (req, res) => {
-  const { description, income, expense } = req.body;
+// app.post("/add", async (req, res) => {
+//   const { description, income, expense } = req.body;
 
-  await db.query(
-    "INSERT INTO transactions (description, income, expense) VALUES ($1, $2, $3)",
-    [description, income || 0, expense || 0]
-  );
+//   await db.query(
+//     "INSERT INTO transactions (description, income, expense) VALUES ($1, $2, $3)",
+//     [description, income || 0, expense || 0]
+//   );
 
-  res.redirect("/");
-});
+//   res.redirect("/");
+// });
 
 
 // DELETE
