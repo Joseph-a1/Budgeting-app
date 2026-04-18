@@ -3,6 +3,7 @@ import express from "express";
 import path from "path";
 import bodyParser from "body-parser";
 import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
 import bcrypt from "bcrypt";
 import pg from "pg";
 import crypto from "crypto";
@@ -45,8 +46,8 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }
 });
 
-const PostgresSession = pgSession(session);
-
+// const PostgresSession = pgSession(session);
+const PostgresSession = connectPgSimple(session);
 app.use(session({
   store: new PostgresSession({
     pool: pool,
