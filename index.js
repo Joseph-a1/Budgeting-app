@@ -43,8 +43,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+ 
   ssl: { rejectUnauthorized: false }
+  
 });
+ console.log("DB URL:", process.env.DATABASE_URL);
 
 // const PostgresSession = pgSession(session);
 const PostgresSession = connectPgSimple(session);
