@@ -42,12 +42,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // const { Pool } = pkg;
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_PUBLIC_URL,
+  connectionString: process.env.DATABASE_URL,
  
   ssl: { rejectUnauthorized: false }
   
 });
- console.log("DB URL:", process.env.DATABASE_PUBLIC_URL);
+ console.log("DB URL:", process.env.DATABASE_URL);
 
 // const PostgresSession = pgSession(session);
 const PostgresSession = connectPgSimple(session);
