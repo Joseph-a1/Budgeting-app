@@ -117,13 +117,13 @@ app.post("/login", async (req, res) => {
     [email]
   );
 
-  if (result.rows.length === 0) return res.send("User not found kindly klick on register");
+  if (result.rows.length === 0) return res.send(<h2>"User not found kindly klick on register"</h2>);
 
   const user = result.rows[0];
 
   const match = await bcrypt.compare(password, user.password);
 
-  if (!match) return res.send("Wrong password ❌");
+  if (!match) return res.send(<h2>"Wrong password ❌"</h2>);
   req.session.user = user; 
   res.redirect("/dashboard");
 });
@@ -139,7 +139,7 @@ app.post("/forgot-password", async (req, res) => {
     );
 
     if (userResult.rows.length === 0) {
-      return res.send("User not found");
+      return res.send(<p>"User not found"</p>);
     }
 
     // 2️⃣ Generate reset token
@@ -156,7 +156,7 @@ app.post("/forgot-password", async (req, res) => {
     await sendResetEmail(email, token);
 
     
-    res.send("Password reset link sent to your email. Check inbox and Click");
+    res.send(<p>"Password reset link sent to your email. Check inbox and Click"</p>);
 
    } catch (err) {
     console.log("ERROR IN FORGOT-PASSWORD:", err);
