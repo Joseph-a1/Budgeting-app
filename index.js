@@ -73,9 +73,9 @@ const port = process.env.PORT || 3000;
 // }));
 
 // HOME PAGE
-// app.get("/", (req, res) => {
-//   res.render("home");
-// });
+app.get("/", (req, res) => {
+  res.render("home");
+});
 app.get("/about", (req,res) =>{
   res.render("about")
 });
@@ -285,26 +285,26 @@ app.post("/add", async (req, res) => {
 //   res.redirect("/dashboard");
 // });
 
-app.get("/", async (req, res) => {
-  const result = await db.query("SELECT * FROM transactions");
+// app.get("/", async (req, res) => {
+//   const result = await db.query("SELECT * FROM transactions");
 
-  let totalIncome = 0;
-  let totalExpense = 0;
+//   let totalIncome = 0;
+//   let totalExpense = 0;
 
-  result.rows.forEach(item => {
-    totalIncome += Number(item.income);
-    totalExpense += Number(item.expense);
-  });
+//   result.rows.forEach(item => {
+//     totalIncome += Number(item.income);
+//     totalExpense += Number(item.expense);
+//   });
 
-  const balance = totalIncome - totalExpense;
+//   const balance = totalIncome - totalExpense;
 
-  res.render("index", {
-    transactions: result.rows,
-    totalIncome,
-    totalExpense,
-    balance
-  });
-});
+//   res.render("index", {
+//     transactions: result.rows,
+//     totalIncome,
+//     totalExpense,
+//     balance
+//   });
+// });
 // app.post("/add", async (req, res) => {
 //   const { description, income, expense } = req.body;
 
