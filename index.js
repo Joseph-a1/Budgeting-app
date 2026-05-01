@@ -73,9 +73,9 @@ const port = process.env.PORT || 3000;
 // }));
 
 // HOME PAGE
-app.get("/", (req, res) => {
-  res.render("home");
-});
+// app.get("/", (req, res) => {
+//   res.render("home");
+// });
 app.get("/about", (req,res) =>{
   res.render("about")
 });
@@ -153,10 +153,17 @@ app.post("/forgot-password", async (req, res) => {
     );
 
     // 4️⃣ Send reset email
-    await sendResetEmail(email, token);
+    // await sendResetEmail(email, token);
 
     
-    res.send("<p>Password reset link sent to your email. Check inbox and Click to reset your password please</p>");
+    // res.send("<p>Password reset link sent to your email. Check inbox and Click to reset your password please</p>");
+    sendResetEmail(email, token).catch(err => {
+  console.log("EMAIL ERROR:", err);
+});
+console.log("Sending email to:", email);
+console.log("Generated token:", token);
+
+res.send("<p>Password reset link sent to your email kindly click on the link to reset your password...</p>");
 
    } catch (err) {
     console.log("ERROR IN FORGOT-PASSWORD:", err);

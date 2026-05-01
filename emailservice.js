@@ -13,21 +13,22 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendResetEmail = async (to, token) => {
+export const sendResetEmail = async (email, token) => {
      //const resetLink = `${process.env.APP_URL}/reset-password?token=${token}`;
-  const resetLink = `http://localhost:3000/reset-password?token=${token}`;
+  const resetLink = `budgeting-app-production-c792.up.railway.app/reset-password?token=${token}`;
 
   try {
     await transporter.sendMail({
       from: `"Your App" <${process.env.SMTP_USER}>`,
-      to: to,
+      to: email,
       subject: "Password Reset",
       html: `
         <h2>Password Reset</h2>
         <p>Click the link below to reset your password:</p>
-        <a href="${resetLink}">${resetLink}</a>
+        <a href="${resetLink}">Reset Password</a>
       `,
     });
+      console.log("Reset email sent:", resetLink);
 
     //console.log("EMAIL SENT SUCCESSFULLY");
 
