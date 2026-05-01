@@ -50,18 +50,26 @@ const pool = new Pool({
  console.log("DB URL:", process.env.DATABASE_URL);
 
 // const PostgresSession = pgSession(session);
-const PostgresSession = connectPgSimple(session);
+// const PostgresSession = connectPgSimple(session);
+// app.use(session({
+//   store: new PostgresSession({
+//     pool: pool,
+//       createTableIfMissing: true
+//     // tableName: "session"
+//   }),
+//   secret: process.env.SESSION_SECRET || "budget-secret",
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24 // 1 day
+//   }
+// }));
 app.use(session({
-  store: new PostgresSession({
-    pool: pool,
-      createTableIfMissing: true
-    // tableName: "session"
-  }),
   secret: process.env.SESSION_SECRET || "budget-secret",
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 // 1 day
+    maxAge: 1000 * 60 * 60 * 24
   }
 }));
 const port = process.env.PORT || 3000;
