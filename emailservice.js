@@ -18,7 +18,9 @@ export const sendResetEmail = async (email, token) => {
     console.log("ENV CHECK", {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS ? "exists" : "missing"
+
   });
+  console.log("SMTP TEST:", process.env.SMTP_USER);
   const resetLink = `https://budgeting-app-production-c792.up.railway.app/reset-password?token=${token}`;
 
   try {
