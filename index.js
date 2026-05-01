@@ -139,7 +139,7 @@ app.post("/forgot-password", async (req, res) => {
     );
 
     if (userResult.rows.length === 0) {
-      return res.send(<p>"User not found"</p>);
+      return res.send("<p>User not found</p>");
     }
 
     // 2️⃣ Generate reset token
