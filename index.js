@@ -117,13 +117,13 @@ app.post("/login", async (req, res) => {
     [email]
   );
 
-  if (result.rows.length === 0) return res.send(<h2>"User not found kindly klick on register"</h2>);
+  if (result.rows.length === 0) return res.send("<p>User not found kindly klick on register</p>");
 
   const user = result.rows[0];
 
   const match = await bcrypt.compare(password, user.password);
 
-  if (!match) return res.send(<h2>"Wrong password ❌"</h2>);
+  if (!match) return res.send("<h2>Wrong password ❌</h2>");
   req.session.user = user; 
   res.redirect("/dashboard");
 });
@@ -156,7 +156,7 @@ app.post("/forgot-password", async (req, res) => {
     await sendResetEmail(email, token);
 
     
-    res.send(<p>"Password reset link sent to your email. Check inbox and Click"</p>);
+    res.send("<p>Password reset link sent to your email. Check inbox and Click to reset your password please</p>");
 
    } catch (err) {
     console.log("ERROR IN FORGOT-PASSWORD:", err);
@@ -178,7 +178,7 @@ app.get("/reset-password", async (req, res) => {
     );
 
     if (user.rows.length === 0) {
-        return res.send("Invalid or expired token");
+        return res.send("<p>Invalid or expired token</p>");
     }
 
     res.render("reset", { token, success: null }); 
@@ -210,7 +210,7 @@ app.post("/reset-password", async (req, res) => {
     [hashedPassword, token]
   );
     res.render("reset.ejs", 
-      { success: "Password updated successfully",   
+      { success: "<h2>Password updated successfully</h2>",   
         token: null,
          error: null
     
