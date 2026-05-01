@@ -15,6 +15,7 @@ export default db;
 // const pool = new Pool({
 //   user: "postgres",
 //   host: "localhost",
+
 //   database: "Users",
 //   password: "paul123",
 //   port: 5432,

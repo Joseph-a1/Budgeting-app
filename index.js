@@ -54,7 +54,8 @@ const PostgresSession = connectPgSimple(session);
 app.use(session({
   store: new PostgresSession({
     pool: pool,
-    tableName: "session"
+      createTableIfMissing: true
+    // tableName: "session"
   }),
   secret: process.env.SESSION_SECRET || "budget-secret",
   resave: false,
@@ -289,7 +290,7 @@ app.post("/add", async (req, res) => {
 //   const result = await db.query("SELECT * FROM transactions");
 
 //   let totalIncome = 0;
-//   let totalExpense = 0;
+//   let totalExpense = 0;git commit
 
 //   result.rows.forEach(item => {
 //     totalIncome += Number(item.income);
