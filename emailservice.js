@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendResetEmail = async (email, token) => {
      //const resetLink = `${process.env.APP_URL}/reset-password?token=${token}`;
-  const resetLink = `budgeting-app-production-c792.up.railway.app/reset-password?token=${token}`;
+  const resetLink = `https://budgeting-app-production-c792.up.railway.app/reset-password?token=${token}`;
 
   try {
     await transporter.sendMail({
@@ -28,14 +28,22 @@ export const sendResetEmail = async (email, token) => {
         <a href="${resetLink}">Reset Password</a>
       `,
     });
+
       console.log("Reset email sent:", resetLink);
+      console.log("EMAIL SENT:", info.response);
+    console.log("RESET LINK:", resetLink);
+
+  } catch (err) {
+    console.log("❌ EMAIL ERROR:", err);
+  }
+};
 
     //console.log("EMAIL SENT SUCCESSFULLY");
 
-  } catch (err) {
+ // } catch (err) {
     //console.log("EMAIL ERROR:", err);
-  }
-};
+  //}
+//};
 // import nodemailer from "nodemailer";
 // import dotenv from "dotenv";
 
